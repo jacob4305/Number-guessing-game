@@ -1,35 +1,64 @@
 import random
 
-random_number = 0
+ 
+
+player_score = [10]
+
+print("Welcome to the number guessing game!!")
+
+ 
 
 def start_game():
-    
-    print("Welcome to the number guessing game!".title())
-    
-    random_number = random.randint(1, 11)
-    attempts = 0
-    
-    while True:
-        try:
-            user_input = int(input("{}Try to guess what number im thinking of!{}Hint(Its between 1 and 10) ==>  ".format("\n", "\n")))
-        except ValueError as ve:
-            print("{}Please enter a NUMBER between 1 and 10".format("\t").upper())
-            continue
-        if user_input > 10:
-            print("{}{}Number has to be 10 or lower".format("\n", "\t").upper())
-            continue
-        if user_input > random_number:
-            print("{}{}Its lower".format("\n", "\t").upper())
-        if user_input < random_number:
-            print("{}{}Its higher".format("\n", "\t").upper())
-        elif user_input == random_number:
-            attempts += 1
-            print("{}{}YOU GOT IT!!!, it took you {} guesses!".format("\n", "\t", attempts))
-            break
-            
-        attempts += 1
 
-    print("{}------Thanks for playing!!!------".format("\n").upper())
-                           
-    
+
+    random_number = random.randint(1, 10)
+    guesses = 0
+
+    while True:
+
+        top_score = player_score[0]
+        print("The current top score is {}".format(top_score))
+
+        try:
+            user_guess = int(input("Guess what number im thinking of?: "))
+        except ValueError:
+            print("Please enter a number")
+            continue
+        if user_guess > 10:
+            print("number cant be over 10")
+            continue
+        if user_guess < 1:
+            print("number cant be under 1")
+            continue
+        if user_guess > random_number:
+            guesses += 1
+            print("Its lower")
+        if user_guess < random_number:
+            guesses += 1
+            print("Its higher")
+        if user_guess == random_number:
+            guesses += 1
+            print("You got it, it took you {} guesses".format(guesses))
+            player_score.append(guesses)
+            player_score.sort()                                  
+            break
+
+                                               
+
+def play_again():
+
+
+    while True:
+
+        play_again = input("Do you want to play again?: ")
+        if play_again == "y".lower():
+            start_game()
+        elif play_again == "n".lower():
+            print("Thanks for playing!!!")
+            break
+        else:
+            print("Please enter either y or n")
+            continue
+
 start_game()
+play_again()
