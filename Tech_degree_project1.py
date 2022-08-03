@@ -14,7 +14,6 @@ def start_game():
         if player_score != []:
             top_score = player_score[0]
             print("The current top score is {}".format(top_score))
-
         if player_score == []:
             print("There is no current top score")
         try:
