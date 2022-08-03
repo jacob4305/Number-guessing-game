@@ -1,11 +1,7 @@
 import random
 
- 
-
-player_score = [10]
-
+player_score = []
 print("Welcome to the number guessing game!!")
-
  
 
 def start_game():
@@ -15,10 +11,12 @@ def start_game():
     guesses = 0
 
     while True:
+        if player_score != []:
+            top_score = player_score[0]
+            print("The current top score is {}".format(top_score))
 
-        top_score = player_score[0]
-        print("The current top score is {}".format(top_score))
-
+        if player_score == []:
+            print("There is no current top score")
         try:
             user_guess = int(input("Guess what number im thinking of?: "))
         except ValueError:
@@ -49,8 +47,7 @@ def play_again():
 
 
     while True:
-
-        play_again = input("Do you want to play again?: ")
+        play_again = input("Do you want to play again? (y/n): ")
         if play_again == "y".lower():
             start_game()
         elif play_again == "n".lower():
